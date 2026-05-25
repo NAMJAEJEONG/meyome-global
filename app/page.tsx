@@ -1,166 +1,115 @@
-// This page demonstrates how to integrate your Next.js front‑end with the
-// Cafe24 Front API so that your global site can display live product data
-// from your main Meyome store (meyome.kr).  It is written as a server
-// component and uses environment variables to store sensitive credentials.
-//
-// Before using this component you must create a `.env.local` file at the
-// root of your project with the following variables:
-//
-// NEXT_PUBLIC_CAFE24_MALL_ID=meyome               # your mall ID
-// NEXT_PUBLIC_CAFE24_CLIENT_ID=<client_id>        # your Front API client id
-// NEXT_PUBLIC_CAFE24_ACCESS_TOKEN=<access_token>  # your Front API access token
-//
-// Visit https://developers.cafe24.com for instructions on registering
-// an app, obtaining your client id and generating an access token.
-// Make sure the token has the `mall.read_product` scope.
+export default function HomePage() {
+  const products = [
+    {
+      name: "Ice Blue Jelly Firkin",
+      price: "USD 46",
+      status: "Available",
+      image: "https://www.meyome.kr/이미지주소넣기.jpg",
+      link: "https://www.meyome.kr/상품주소넣기",
+    },
+    {
+      name: "Green Jelly Firkin",
+      price: "USD 80",
+      status: "Available",
+      image: "https://www.meyome.kr/이미지주소넣기.jpg",
+      link: "https://www.meyome.kr/상품주소넣기",
+    },
+  ];
 
-import React from 'react';
-
-// Define a TypeScript interface to describe the product structure we expect
-// from the Cafe24 API.  Only the fields we use are defined here.
-interface Cafe24Product {
-  product_no: number;
-  product_code: string;
-  product_name: string;
-  price: string;
-  selling: string;
-  list_image?: string;
-}
-
-// Because this component is an async server component, it can perform
-// fetches directly.  The `fetch` call runs on the server, so you don't
-// expose your token to the client.
-async function getProducts(): Promise<Cafe24Product[]> {
-  const mallId = process.env.NEXT_PUBLIC_CAFE24_MALL_ID;
-  const accessToken = process.env.NEXT_PUBLIC_CAFE24_ACCESS_TOKEN;
-  const clientId = process.env.NEXT_PUBLIC_CAFE24_CLIENT_ID;
-
-  if (!mallId || !accessToken || !clientId) {
-    console.warn(
-      'Cafe24 API credentials are missing. Check your .env.local file.'
-    );
-    return [];
-  }
-
-  try {
-    const res = await fetch(
-      `https://${mallId}.cafe24api.com/api/v2/products?display=50&embed=images`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          'Content-Type': 'application/json',
-          'X-Cafe24-Client-Id': clientId,
-        },
-        // Revalidate the data at most once per hour.  Adjust as needed.
-        next: { revalidate: 60 * 60 },
-      }
-    );
-    const data = await res.json();
-    return data?.products ?? [];
-  } catch (err) {
-    console.error('Failed to fetch products:', err);
-    return [];
-  }
-}
-
-export default async function HomePage() {
-  const products = await getProducts();
   return (
-    <main
-      style={{
-        minHeight: '100vh',
-        position: 'relative',
-        overflow: 'hidden',
-        background: '#fff8fb',
-        paddingBottom: '80px',
-      }}
-    >
-      {/* Hero section with background image and tagline */}
+    <main style={{ background: "#fff8fb", color: "#181818" }}>
       <section
         style={{
-          minHeight: '80vh',
-          position: 'relative',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          color: '#fff',
-          textAlign: 'center',
-          padding: '20px',
-          overflow: 'hidden',
+          minHeight: "100vh",
+          position: "relative",
+          overflow: "hidden",
         }}
       >
         <img
-          src='https://images.unsplash.com/photo-1594223274512-ad4803739b7c?q=80&w=2000&auto=format&fit=crop'
-          alt='Meyome Global'
+          src="https://images.unsplash.com/photo-1594223274512-ad4803739b7c?q=80&w=2000&auto=format&fit=crop"
+          alt="Meyome Global"
           style={{
-            position: 'absolute',
+            position: "absolute",
             inset: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            zIndex: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
           }}
         />
+
         <div
           style={{
-            position: 'absolute',
+            position: "absolute",
             inset: 0,
             background:
-              'linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.55))',
-            zIndex: 1,
+              "linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.62))",
           }}
         />
+
         <div
-          style={{ position: 'relative', zIndex: 2, paddingTop: '40px' }}
+          style={{
+            position: "relative",
+            zIndex: 2,
+            minHeight: "100vh",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            color: "#fff",
+            textAlign: "center",
+            padding: "20px",
+          }}
         >
           <p
             style={{
-              letterSpacing: '0.4em',
-              textTransform: 'uppercase',
-              fontSize: '12px',
-              marginBottom: '20px',
+              letterSpacing: "0.4em",
+              textTransform: "uppercase",
+              fontSize: "12px",
+              marginBottom: "20px",
             }}
           >
             Meyome Seoul Archive
           </p>
+
           <h1
             style={{
-              fontSize: '64px',
-              lineHeight: '1',
+              fontSize: "clamp(48px, 9vw, 72px)",
+              lineHeight: "1",
               margin: 0,
               fontWeight: 700,
             }}
           >
             Meyome Global
           </h1>
+
           <p
             style={{
-              maxWidth: '600px',
-              marginTop: '24px',
-              lineHeight: '1.7',
-              color: 'rgba(255,255,255,0.85)',
-              marginLeft: 'auto',
-              marginRight: 'auto',
+              maxWidth: "620px",
+              marginTop: "24px",
+              lineHeight: "1.7",
+              color: "rgba(255,255,255,0.9)",
             }}
           >
-            Vintage bags, jelly pieces and strange little treasures selected
-            by Meyome. We ship worldwide via EMS with PayPal checkout
-            available.
+            Tiny Seoul archive for cute bag lovers worldwide.
+            <br />
+            Vintage bags, jelly pieces, and strange little treasures selected by Meyome.
+            <br />
+            Worldwide EMS shipping. PayPal invoice available.
           </p>
+
           <a
-            href='#shop'
+            href="#shop"
             style={{
-              marginTop: '40px',
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '200px',
-              height: '56px',
-              borderRadius: '999px',
-              background: '#fff',
-              color: '#181818',
-              textDecoration: 'none',
+              marginTop: "40px",
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "180px",
+              height: "56px",
+              borderRadius: "999px",
+              background: "#fff",
+              color: "#181818",
+              textDecoration: "none",
               fontWeight: 700,
             }}
           >
@@ -169,91 +118,131 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Shop section listing products from Cafe24 */}
-      <section id='shop' style={{ padding: '40px 20px' }}>
-        <h2
-          style={{ textAlign: 'center', fontSize: '32px', marginBottom: 12 }}
-        >
+      <section
+        id="shop"
+        style={{
+          padding: "80px 20px",
+          maxWidth: "1180px",
+          margin: "0 auto",
+        }}
+      >
+        <h2 style={{ textAlign: "center", fontSize: "36px", marginBottom: "12px" }}>
           Available Pieces
         </h2>
-        {products.length === 0 && (
-          <p style={{ textAlign: 'center', color: '#666' }}>
-            No products found. Check your API credentials or add products to
-            your store.
-          </p>
-        )}
-        <div
+
+        <p
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-            gap: '24px',
-            maxWidth: '1200px',
-            margin: '0 auto',
+            textAlign: "center",
+            color: "#666",
+            lineHeight: 1.7,
+            marginBottom: "44px",
           }}
         >
-          {products.map((item) => {
-            // Derive a link to the product on your main store.  The Cafe24
-            // product_code is used in the URL on meyome.kr.  Adjust the
-            // template below if your store uses a different URL scheme.
-            const productUrl = `https://www.meyome.kr/product/${item.product_code}/`; // or your product detail URL
-            const imageSrc = item.list_image ||
-              'https://placehold.co/300x300?text=No+Image';
-            return (
-              <div
-                key={item.product_no}
-                style={{
-                  border: '1px solid #eee',
-                  borderRadius: 16,
-                  padding: 16,
-                  background: '#fff',
-                  display: 'flex',
-                  flexDirection: 'column',
-                }}
-              >
-                <div
+          For international orders, please DM us your country and item name.
+          <br />
+          We will check EMS shipping fee and send a PayPal invoice.
+        </p>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+            gap: "24px",
+          }}
+        >
+          {products.map((product) => (
+            <div
+              key={product.name}
+              style={{
+                background: "#fff",
+                border: "1px solid #eee",
+                borderRadius: "26px",
+                overflow: "hidden",
+              }}
+            >
+              <a href={product.link} target="_blank" rel="noopener noreferrer">
+                <img
+                  src={product.image}
+                  alt={product.name}
                   style={{
-                    width: '100%',
-                    paddingBottom: '100%',
-                    position: 'relative',
-                    borderRadius: 12,
-                    overflow: 'hidden',
-                    background: '#f7f7f7',
+                    width: "100%",
+                    aspectRatio: "1 / 1",
+                    objectFit: "cover",
+                    display: "block",
+                    background: "#f1e8ee",
+                  }}
+                />
+              </a>
+
+              <div style={{ padding: "20px" }}>
+                <p
+                  style={{
+                    fontSize: "12px",
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    color: "#999",
+                    margin: "0 0 10px",
                   }}
                 >
-                  <img
-                    src={imageSrc}
-                    alt={item.product_name}
-                    style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                    }}
-                  />
-                </div>
-                <h3 style={{ fontSize: 20, margin: '16px 0 4px' }}>
-                  {item.product_name}
+                  {product.status}
+                </p>
+
+                <h3 style={{ fontSize: "20px", margin: "0 0 8px" }}>
+                  {product.name}
                 </h3>
-                <p style={{ fontWeight: 700, margin: 0 }}>{item.price}</p>
+
+                <p style={{ fontWeight: 700, margin: "0 0 18px" }}>
+                  {product.price}
+                </p>
+
                 <a
-                  href={productUrl}
-                  target='_blank'
-                  rel='noopener noreferrer'
+                  href="https://www.instagram.com/meyome.bag/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   style={{
-                    marginTop: 'auto',
-                    display: 'inline-block',
-                    padding: '12px 0',
+                    display: "inline-flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    height: "46px",
+                    borderRadius: "999px",
+                    background: "#181818",
+                    color: "#fff",
+                    textDecoration: "none",
                     fontWeight: 700,
-                    color: '#181818',
                   }}
                 >
-                  View on Meyome.kr →
+                  DM to Order
                 </a>
               </div>
-            );
-          })}
+            </div>
+          ))}
+        </div>
+
+        <div
+          style={{
+            marginTop: "60px",
+            padding: "28px",
+            borderRadius: "26px",
+            background: "#fff",
+            textAlign: "center",
+            lineHeight: 1.8,
+          }}
+        >
+          <strong>International Order Guide</strong>
+          <br />
+          1. Choose your item.
+          <br />
+          2. DM us your country and item name.
+          <br />
+          3. We will check EMS shipping fee.
+          <br />
+          4. Payment is available by PayPal invoice.
+          <br />
+          Instagram:{" "}
+          <a href="https://www.instagram.com/meyome.bag/" target="_blank">
+            @meyome.bag
+          </a>
         </div>
       </section>
     </main>
