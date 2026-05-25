@@ -4,7 +4,7 @@ export default function HomePage() {
       name: "Ice Blue Jelly Firkin",
       price: "USD 46",
       status: "Available",
-      image: "https://www.meyome.kr/이미지주소넣기.jpg",
+      image: "https://ecimg.cafe24img.com/pg1834b67694111017/skawo9386/web/product/big/20260512/f935a830a548b6225543a0a41e8f21fd.png",
       link: "https://www.meyome.kr/상품주소넣기",
     },
     {
