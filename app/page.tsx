@@ -1,250 +1,137 @@
-export default function HomePage() {
-  const products = [
-    {
-      name: "Ice Blue Jelly Firkin",
-      price: "USD 46",
-      status: "Available",
-      image: "https://ecimg.cafe24img.com/pg1834b67694111017/skawo9386/web/product/big/20260512/f935a830a548b6225543a0a41e8f21fd.png",
-      link: "https://www.meyome.kr/상품주소넣기",
-    },
-    {
-      name: "Green Jelly Firkin",
-      price: "USD 80",
-      status: "Available",
-      image: "https://www.meyome.kr/이미지주소넣기.jpg",
-      link: "https://www.meyome.kr/상품주소넣기",
-    },
-  ];
-
+export default function Home() {
   return (
-    <main style={{ background: "#fff8fb", color: "#181818" }}>
-      <section
-        style={{
-          minHeight: "100vh",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <img
-          src="https://images.unsplash.com/photo-1594223274512-ad4803739b7c?q=80&w=2000&auto=format&fit=crop"
-          alt="Meyome Global"
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-          }}
-        />
+    <main className="min-h-screen bg-[#f8f5f0] text-[#1f1f1f]">
+      <header className="flex items-center justify-between px-6 py-5 md:px-12">
+        <div className="text-2xl font-semibold tracking-wide">MEYOME</div>
+        <nav className="hidden gap-8 text-sm md:flex">
+          <a href="#shop">Shop</a>
+          <a href="#order">How to Order</a>
+          <a href="#shipping">Shipping</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </header>
 
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.62))",
-          }}
-        />
-
-        <div
-          style={{
-            position: "relative",
-            zIndex: 2,
-            minHeight: "100vh",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            color: "#fff",
-            textAlign: "center",
-            padding: "20px",
-          }}
-        >
-          <p
-            style={{
-              letterSpacing: "0.4em",
-              textTransform: "uppercase",
-              fontSize: "12px",
-              marginBottom: "20px",
-            }}
-          >
-            Meyome Seoul Archive
+      <section className="px-6 py-16 md:px-12 md:py-24">
+        <div className="mx-auto max-w-5xl text-center">
+          <p className="mb-4 text-sm uppercase tracking-[0.3em] text-[#8a6f4d]">
+            Worldwide Shipping
           </p>
-
-          <h1
-            style={{
-              fontSize: "clamp(48px, 9vw, 72px)",
-              lineHeight: "1",
-              margin: 0,
-              fontWeight: 700,
-            }}
-          >
-            Meyome Global
+          <h1 className="text-4xl font-semibold leading-tight md:text-7xl">
+            Curated Bags for Global Customers
           </h1>
-
-          <p
-            style={{
-              maxWidth: "620px",
-              marginTop: "24px",
-              lineHeight: "1.7",
-              color: "rgba(255,255,255,0.9)",
-            }}
-          >
-            Tiny Seoul archive for cute bag lovers worldwide.
-            <br />
-            Vintage bags, jelly pieces, and strange little treasures selected by Meyome.
-            <br />
-            Worldwide EMS shipping. PayPal invoice available.
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-neutral-600 md:text-lg">
+            Premium selected handbags shipped from Korea to the United States,
+            Europe, Australia, Japan, and more.
           </p>
-
-          <a
-            href="#shop"
-            style={{
-              marginTop: "40px",
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "180px",
-              height: "56px",
-              borderRadius: "999px",
-              background: "#fff",
-              color: "#181818",
-              textDecoration: "none",
-              fontWeight: 700,
-            }}
-          >
-            SHOP NOW
-          </a>
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <a
+              href="#shop"
+              className="rounded-full bg-black px-8 py-4 text-sm font-medium text-white"
+            >
+              View Collection
+            </a>
+            <a
+              href="#contact"
+              className="rounded-full border border-black px-8 py-4 text-sm font-medium"
+            >
+              Contact to Order
+            </a>
+          </div>
         </div>
       </section>
 
-      <section
-        id="shop"
-        style={{
-          padding: "80px 20px",
-          maxWidth: "1180px",
-          margin: "0 auto",
-        }}
-      >
-        <h2 style={{ textAlign: "center", fontSize: "36px", marginBottom: "12px" }}>
-          Available Pieces
-        </h2>
+      <section id="shop" className="px-6 py-14 md:px-12">
+        <h2 className="mb-8 text-3xl font-semibold">Best Sellers</h2>
 
-        <p
-          style={{
-            textAlign: "center",
-            color: "#666",
-            lineHeight: 1.7,
-            marginBottom: "44px",
-          }}
-        >
-          For international orders, please DM us your country and item name.
-          <br />
-          We will check EMS shipping fee and send a PayPal invoice.
-        </p>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-            gap: "24px",
-          }}
-        >
-          {products.map((product) => (
-            <div
-              key={product.name}
-              style={{
-                background: "#fff",
-                border: "1px solid #eee",
-                borderRadius: "26px",
-                overflow: "hidden",
-              }}
-            >
-              <a href={product.link} target="_blank" rel="noopener noreferrer">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  style={{
-                    width: "100%",
-                    aspectRatio: "1 / 1",
-                    objectFit: "cover",
-                    display: "block",
-                    background: "#f1e8ee",
-                  }}
-                />
+        <div className="grid gap-6 md:grid-cols-3">
+          {[
+            "TPU Handbag",
+            "PVC Handbag",
+            "Daily Shoulder Bag",
+          ].map((item) => (
+            <div key={item} className="rounded-3xl bg-white p-5 shadow-sm">
+              <div className="mb-5 aspect-[4/5] rounded-2xl bg-[#e8ded0]" />
+              <h3 className="text-lg font-semibold">{item}</h3>
+              <p className="mt-2 text-sm text-neutral-600">
+                Available for international order.
+              </p>
+              <a
+                href="#contact"
+                className="mt-5 inline-block rounded-full bg-black px-5 py-3 text-sm text-white"
+              >
+                Ask Price
               </a>
-
-              <div style={{ padding: "20px" }}>
-                <p
-                  style={{
-                    fontSize: "12px",
-                    letterSpacing: "0.12em",
-                    textTransform: "uppercase",
-                    color: "#999",
-                    margin: "0 0 10px",
-                  }}
-                >
-                  {product.status}
-                </p>
-
-                <h3 style={{ fontSize: "20px", margin: "0 0 8px" }}>
-                  {product.name}
-                </h3>
-
-                <p style={{ fontWeight: 700, margin: "0 0 18px" }}>
-                  {product.price}
-                </p>
-
-                <a
-                  href="https://www.instagram.com/meyome.bag/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    display: "inline-flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                    height: "46px",
-                    borderRadius: "999px",
-                    background: "#181818",
-                    color: "#fff",
-                    textDecoration: "none",
-                    fontWeight: 700,
-                  }}
-                >
-                  DM to Order
-                </a>
-              </div>
             </div>
           ))}
         </div>
+      </section>
 
-        <div
-          style={{
-            marginTop: "60px",
-            padding: "28px",
-            borderRadius: "26px",
-            background: "#fff",
-            textAlign: "center",
-            lineHeight: 1.8,
-          }}
-        >
-          <strong>International Order Guide</strong>
-          <br />
-          1. Choose your item.
-          <br />
-          2. DM us your country and item name.
-          <br />
-          3. We will check EMS shipping fee.
-          <br />
-          4. Payment is available by PayPal invoice.
-          <br />
-          Instagram:{" "}
-          <a href="https://www.instagram.com/meyome.bag/" target="_blank">
-            @meyome.bag
+      <section id="order" className="bg-white px-6 py-16 md:px-12">
+        <h2 className="mb-8 text-3xl font-semibold">How to Order</h2>
+
+        <div className="grid gap-5 md:grid-cols-4">
+          {[
+            "Choose item",
+            "Contact us",
+            "Pay by PayPal",
+            "Receive tracking",
+          ].map((step, index) => (
+            <div key={step} className="rounded-3xl border p-6">
+              <p className="mb-4 text-sm text-neutral-500">Step {index + 1}</p>
+              <h3 className="text-xl font-semibold">{step}</h3>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="shipping" className="px-6 py-16 md:px-12">
+        <h2 className="mb-6 text-3xl font-semibold">Worldwide Shipping</h2>
+        <p className="max-w-2xl leading-7 text-neutral-600">
+          We ship internationally from Korea. Shipping fees vary by country and
+          package quantity. Tracking number will be provided after shipment.
+        </p>
+
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          <div className="rounded-3xl bg-white p-6">USA / Europe</div>
+          <div className="rounded-3xl bg-white p-6">Japan / Taiwan</div>
+          <div className="rounded-3xl bg-white p-6">Australia / Canada</div>
+        </div>
+      </section>
+
+      <section className="bg-[#1f1f1f] px-6 py-16 text-white md:px-12">
+        <h2 className="mb-6 text-3xl font-semibold">Secure Payment</h2>
+        <p className="max-w-2xl leading-7 text-neutral-300">
+          International orders are processed through PayPal for secure global
+          payment. Bank transfer may be available for selected customers.
+        </p>
+      </section>
+
+      <section id="contact" className="px-6 py-16 text-center md:px-12">
+        <h2 className="text-3xl font-semibold">Contact to Order</h2>
+        <p className="mx-auto mt-4 max-w-xl text-neutral-600">
+          Send us the item name, quantity, destination country, and shipping
+          address. We will reply with the total price and payment guide.
+        </p>
+
+        <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+          <a
+            href="mailto:hello@meyome.kr"
+            className="rounded-full bg-black px-8 py-4 text-sm font-medium text-white"
+          >
+            Email Order
+          </a>
+          <a
+            href="https://www.instagram.com/"
+            className="rounded-full border border-black px-8 py-4 text-sm font-medium"
+          >
+            Instagram DM
           </a>
         </div>
       </section>
+
+      <footer className="px-6 py-8 text-center text-sm text-neutral-500">
+        © 2026 MEYOME. Worldwide shipping from Korea.
+      </footer>
     </main>
   );
 }
